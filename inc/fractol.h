@@ -6,7 +6,7 @@
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:29:10 by hakim             #+#    #+#             */
-/*   Updated: 2023/04/18 20:15:10 by hakim            ###   ########.fr       */
+/*   Updated: 2023/04/20 01:41:59 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_fractol
 	t_complex	center;
 	double	zoom;
 	char	**available_fractals;
+	t_complex	julia_coor;
 }	t_fractol;
 
 typedef struct	s_color
@@ -73,5 +74,21 @@ int	get_b(int color);
 void	print_colors(int color);
 
 int	cfg_parser(t_fractol *data);
+
+int	is_in_julia(t_complex z, t_complex c, int max_iter);
+
+int	move_arrow(int keycode, t_fractol *data);
+int	zoom_hook(int button, int x, int y, t_fractol *data);
+int	change_max_iter(int keycode, t_fractol *data);
+
+t_fractol	init(void);
+void	destroyer(t_fractol *data);
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_color	iter_to_rgb(int iter_count, int max_iter);
+int rgb_to_trgb(t_color c);
+
+double	ft_abs(double t);
+double	ft_atof(char *str);
 
 #endif

@@ -20,15 +20,23 @@ MLXDIR = mlx_linux
 INC = inc
 
 IFLAGS = -I $(INC)
-
+	
 IFLAGS += -I $(LIBDIR)/$(INC)
 
-IFLAGS += -I $(MLXDIR)
+ifeq ($(UNAME), Linux)
+	IFLAGS += -I $(MLXDIR)
+else
+	IFLAGS += -Imlx
+endif
 
 #LINKER STUFF ==========================================
 LDFLAGS = -Llibft -lft
 
-LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+ifeq ($(UNAME), Linux)
+	LDFLAGS += -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+else
+	LDFLAGS += -lmlx -framework OpenGL -framework AppKit
+endif
 
 #SOURCE STUFF ==========================================
 SRCDIR = srcs
@@ -38,7 +46,11 @@ SRCFILES = main.c \
 	   mandelbrot.c \
 	   utils.c \
 	   colors.c \
-	   parser.c
+	   parser.c \
+	   hooks.c \
+	   init.c \
+	   color_utils.c \
+	   math_utils.c
 
 SRC = $(addprefix $(SRCDIR)/,$(SRCFILES))
 
