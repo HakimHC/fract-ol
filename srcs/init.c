@@ -6,9 +6,11 @@
 /*   By: hakahmed <hakahmed@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 22:30:04 by hakahmed          #+#    #+#             */
-/*   Updated: 2023/04/19 22:32:34 by hakahmed         ###   ########.fr       */
+/*   Updated: 2023/04/20 03:54:56 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdlib.h>
 
 #include <mlx.h>
 
@@ -29,6 +31,8 @@ t_fractol	init(void)
 	res.max_iter = 100;
 	res.center = (t_complex) {0, 0};
 	res.zoom = 1;
+	res.rotate = -1;
+	res.color = 1;
 	res.available_fractals = ft_split("Mandelbrot Julia Newton", 32);
 	return (res);
 }
@@ -54,4 +58,5 @@ void	destroyer(t_fractol *data)
 	mlx_destroy_image((*data).mlx, (*data).img.img);
 	mlx_destroy_window((*data).mlx, (*data).win);
 	ft_free_strarr((*data).available_fractals);
+	exit(0);
 }

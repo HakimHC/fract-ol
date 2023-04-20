@@ -69,7 +69,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 sanitize: CFLAGS += -g3
-sanitize: LDFLAGS += -fsanitize=address -fsanitize=leak
+sanitize: LDFLAGS += -fsanitize=address -fsanitize=address
 sanitize: all
 
 clean:

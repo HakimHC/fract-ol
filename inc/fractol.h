@@ -6,7 +6,7 @@
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:29:10 by hakim             #+#    #+#             */
-/*   Updated: 2023/04/20 01:41:59 by hakahmed         ###   ########.fr       */
+/*   Updated: 2023/04/20 04:18:16 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ typedef struct	s_data
 	int	endian;
 }	t_data;
 
+typedef struct	s_color
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_color;
+
 typedef struct	s_fractol
 {
 	void	*mlx;
@@ -40,16 +47,12 @@ typedef struct	s_fractol
 	int	max_iter;
 	t_complex	center;
 	double	zoom;
-	char	**available_fractals;
+	int	color;
 	t_complex	julia_coor;
+	int	rotate;
+	int	(*f)(t_complex, struct s_fractol);
+	char	**available_fractals;
 }	t_fractol;
-
-typedef struct	s_color
-{
-	int	r;
-	int	g;
-	int	b;
-}	t_color;
 
 /***************** COMPLEX NUMBERS ********************/
 
@@ -61,8 +64,8 @@ t_complex	pixel_to_complex(int x, int y, t_fractol data);
 
 /***************** MANDELBROT STUFF *******************/
 
-int	is_in_mandelbrot(t_complex c, int max_iter);
-void	print_mandelbrot(t_fractol data, int max_iter);
+int	is_in_mandelbrot(t_complex c, t_fractol data);
+void	print_fractal(t_fractol data);
 
 /***************** COLORS AND STUFF *******************/
 
@@ -75,7 +78,7 @@ void	print_colors(int color);
 
 int	cfg_parser(t_fractol *data);
 
-int	is_in_julia(t_complex z, t_complex c, int max_iter);
+int	is_in_julia(t_complex z, t_fractol data);
 
 int	move_arrow(int keycode, t_fractol *data);
 int	zoom_hook(int button, int x, int y, t_fractol *data);
@@ -85,10 +88,11 @@ t_fractol	init(void);
 void	destroyer(t_fractol *data);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-t_color	iter_to_rgb(int iter_count, int max_iter);
+t_color	iter_to_rgb(int iter_count, t_fractol data);
 int rgb_to_trgb(t_color c);
 
 double	ft_abs(double t);
 double	ft_atof(char *str);
+int	multibrot(t_complex c, t_fractol data);
 
 #endif

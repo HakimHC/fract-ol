@@ -6,7 +6,7 @@
 /*   By: hakahmed <hakahmed@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 22:37:46 by hakahmed          #+#    #+#             */
-/*   Updated: 2023/04/20 01:45:56 by hakahmed         ###   ########.fr       */
+/*   Updated: 2023/04/20 03:52:53 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ t_color	interpolate(t_color c1, t_color c2, double t)
 	return (res);
 }
 
-t_color	iter_to_rgb(int iter_count, int max_iter)
+t_color	iter_to_rgb(int iter_count, t_fractol data)
 {
 	double	t;
 	t_color	c1;
 	t_color	c2;
 	t_color	res;
 
-	t = ((double) iter_count / (double) max_iter );
+	t = ((double) iter_count / (double) data.max_iter) * data.color;
 	// printf("flot %f\n", t);
 	c1 = (t_color) {50, 0, 60};
 	c2 = (t_color) {0, 255, 255};
