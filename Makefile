@@ -66,7 +66,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME)
 
 sanitize: CFLAGS += -g3
 sanitize: LDFLAGS += -fsanitize=address -fsanitize=address
@@ -74,10 +74,10 @@ sanitize: all
 
 clean:
 	@make clean -C libft
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

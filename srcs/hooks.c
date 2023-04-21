@@ -6,7 +6,7 @@
 /*   By: hakahmed <hakahmed@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 22:26:07 by hakahmed          #+#    #+#             */
-/*   Updated: 2023/04/21 03:55:02 by hakahmed         ###   ########.fr       */
+/*   Updated: 2023/04/21 12:32:23 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	zoom_space(t_fractol *data)
 
 int	key_hook(int keycode, t_fractol *data)
 {
-	printf("%d\n", keycode);
 	if (keycode == 40 || keycode == 38)
 		change_max_iter(keycode, data);
 	else if (keycode == 53)
