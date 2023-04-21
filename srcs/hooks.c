@@ -6,7 +6,7 @@
 /*   By: hakahmed <hakahmed@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 22:26:07 by hakahmed          #+#    #+#             */
-/*   Updated: 2023/04/20 04:03:59 by hakahmed         ###   ########.fr       */
+/*   Updated: 2023/04/21 03:55:02 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,36 @@
 
 #include "fractol.h"
 
-void	go_home(t_fractol *data)
+void	move_pos(int keycode, t_fractol *data)
 {
-	(*data).zoom = 1;
-	(*data).center = (t_complex) {0, 0};
+	double	move_amount_x;
+	double	move_amount_y;
+
+	move_amount_x = ((double)data->width / 2)
+		/ (data->zoom * data->width);
+	move_amount_y = ((double) data->height / 2)
+		/ (data->zoom * data->height * (double)data->width
+			/ (double)data->height);
+	if (keycode == 123)
+		data->center.real -= move_amount_x;
+	else if (keycode == 124)
+		data->center.real += move_amount_x;
+	else if (keycode == 125)
+		data->center.imag += move_amount_y;
+	else if (keycode == 126)
+		data->center.imag -= move_amount_y;
 }
 
-int	change_max_iter(int keycode, t_fractol *data)
+void	zoom_space(t_fractol *data)
 {
-	if (keycode == 40)
-		(*data).max_iter += 5;
-	else if (keycode == 38 && (*data).max_iter > 5)
-		(*data).max_iter -= 5;
+	data->zoom *= 1.5;
+}
+
+int	key_hook(int keycode, t_fractol *data)
+{
+	printf("%d\n", keycode);
+	if (keycode == 40 || keycode == 38)
+		change_max_iter(keycode, data);
 	else if (keycode == 53)
 		destroyer(data);
 	else if (keycode == 15 && (*data).f == &is_in_julia)
@@ -36,7 +54,13 @@ int	change_max_iter(int keycode, t_fractol *data)
 	else if (keycode == 13)
 		go_home(data);
 	else if (keycode == 12)
-		(*data).color = 1000;
+		change_color(data);
+	else if (keycode >= 123 && keycode <= 126)
+		move_pos(keycode, data);
+	else if (keycode == 48)
+		change_multibrot(data);
+	else if (keycode == 49)
+		zoom_space(data);
 	else
 		return (1);
 	mlx_clear_window((*data).mlx, (*data).win);
@@ -58,21 +82,4 @@ int	zoom_hook(int button, int x, int y, t_fractol *data)
 	mlx_clear_window((*data).mlx, (*data).win);
 	print_fractal(*data);
 	return (0);
-}
-
-int	move_arrow(int keycode, t_fractol *data)
-{
-	if (keycode == 123)
-		(*data).center.real = ((*data).center.real - (*data).zoom) / 1.2;
-	else if (keycode == 98)
-		(*data).center.imag /= 1.2;
-	else if (keycode == 124)
-		(*data).center.real *= 1.2;
-	// else if (keycode == 98)
-	// 	(*data).center.imag *= 1.2;
-	else
-		return (1);
-	mlx_clear_window((*data).mlx, (*data).win);
-	print_fractal(*data);
-	return (1);
 }

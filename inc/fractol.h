@@ -6,7 +6,7 @@
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 19:29:10 by hakim             #+#    #+#             */
-/*   Updated: 2023/04/20 04:18:16 by hakahmed         ###   ########.fr       */
+/*   Updated: 2023/04/20 22:09:22 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_fractol
 	double	zoom;
 	int	color;
 	t_complex	julia_coor;
+	double	multibrot_pow;
 	int	rotate;
 	int	(*f)(t_complex, struct s_fractol);
 	char	**available_fractals;
@@ -82,9 +83,9 @@ int	is_in_julia(t_complex z, t_fractol data);
 
 int	move_arrow(int keycode, t_fractol *data);
 int	zoom_hook(int button, int x, int y, t_fractol *data);
-int	change_max_iter(int keycode, t_fractol *data);
+int	key_hook(int keycode, t_fractol *data);
 
-t_fractol	init(void);
+t_fractol	init(char *name);
 void	destroyer(t_fractol *data);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -94,5 +95,10 @@ int rgb_to_trgb(t_color c);
 double	ft_abs(double t);
 double	ft_atof(char *str);
 int	multibrot(t_complex c, t_fractol data);
+
+void change_max_iter(int keycode, t_fractol *data);
+void	go_home(t_fractol *data);
+void change_color(t_fractol *data);
+void change_multibrot(t_fractol *data);
 
 #endif

@@ -46,11 +46,11 @@ SRCFILES = main.c \
 	   mandelbrot.c \
 	   utils.c \
 	   colors.c \
-	   parser.c \
 	   hooks.c \
 	   init.c \
 	   color_utils.c \
-	   math_utils.c
+	   math_utils.c \
+	   hook_utils.c
 
 SRC = $(addprefix $(SRCDIR)/,$(SRCFILES))
 

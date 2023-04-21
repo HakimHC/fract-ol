@@ -6,7 +6,7 @@
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 11:37:54 by hakim             #+#    #+#             */
-/*   Updated: 2023/04/18 12:14:54 by hakim            ###   ########.fr       */
+/*   Updated: 2023/04/20 22:19:23 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,4 @@ int	get_g(int color)
 int	get_b(int color)
 {
 	return (color & 0xFF);
-}
-
-void	print_colors(int color)
-{
-	printf("T - %d\n", get_t(color));
-	printf("R - %d\n", get_r(color));
-	printf("G - %d\n", get_g(color));
-	printf("B - %d\n", get_b(color));
 }

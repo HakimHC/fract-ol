@@ -6,7 +6,7 @@
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:31:36 by hakim             #+#    #+#             */
-/*   Updated: 2023/04/18 14:48:11 by hakim            ###   ########.fr       */
+/*   Updated: 2023/04/20 22:14:30 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ double	cpx_mag(t_complex num)
 
 t_complex	pixel_to_complex(int x, int y, t_fractol data)
 {
-	double	ratio;
+	double		ratio;
 	t_complex	res;
 
 	ratio = (double) data.width / (double) data.height;
-	res.real = (x - (double)data.width / 2) * (4 / data.zoom) / (double)data.width;
-	res.imag = (y - (double)data.height / 2) * (4 / (data.zoom * ratio)) / (double) data.height;
+	res.real = (x - (double)data.width / 2)
+		* (4 / data.zoom) / (double)data.width;
+	res.imag = (y - (double)data.height / 2)
+		* (4 / (data.zoom * ratio)) / (double) data.height;
 	res.real += data.center.real;
 	res.imag += data.center.imag;
 	return (res);

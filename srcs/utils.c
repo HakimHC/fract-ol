@@ -6,7 +6,7 @@
 /*   By: hakim </var/spool/mail/hakim>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 21:22:27 by hakim             #+#    #+#             */
-/*   Updated: 2023/04/20 03:55:40 by hakahmed         ###   ########.fr       */
+/*   Updated: 2023/04/20 22:12:44 by hakahmed         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 void	determine_color(t_fractol data, int i, int j)
 {
 	t_complex	pix;
-	int	iter_count;
+	int			iter_count;
+	int			color;
 
 	pix = pixel_to_complex(i, j, data);
 	iter_count = data.f(pix, data);
@@ -28,7 +29,7 @@ void	determine_color(t_fractol data, int i, int j)
 		my_mlx_pixel_put(&data.img, i, j, 0x00000000);
 	else
 	{
-		int color = rgb_to_trgb(iter_to_rgb(iter_count, data));
+		color = rgb_to_trgb(iter_to_rgb(iter_count, data));
 		my_mlx_pixel_put(&data.img, i, j, color);
 	}
 }
@@ -51,5 +52,3 @@ void	print_fractal(t_fractol data)
 	}
 	mlx_put_image_to_window(data.mlx, data.win, data.img.img, 0, 0);
 }
-
-
