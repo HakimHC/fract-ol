@@ -73,7 +73,7 @@ sanitize: LDFLAGS += -fsanitize=address -fsanitize=address
 sanitize: all
 
 clean:
-	@make clean -C libft
+	@make fclean -C libft
 	@rm -f $(OBJ)
 
 fclean: clean
